@@ -4,37 +4,30 @@ import { connect } from "react-redux";
 
 import { setUsername } from "../../store/actions/frontend-state-actions/profile";
 
-class FindPlaceScreen extends Component {
+class PlaceDetailScreen extends Component {
   buttonHandler = () => {
-    this.props.navigator.push({
-      screen: "awesome-places.PlaceDetailScreen",
-      title: "Detail page",
-      passProps: {
-        selectName: "arthur"
-      }
+    this.props.navigator.pop({
+      animated: true,
+      animationType: "fade"
     });
   };
+
   render() {
     return (
       <View>
-        <Text>Find Place Screen</Text>
-        <Text>{this.props.username}</Text>
+        <Text>Place Detail Screen</Text>
+        <Text>{this.props.selectName}</Text>
+        <Text>User Name</Text>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
           onChangeText={text => this.props.onSaveUsername(text)}
           value={this.props.username}
         />
-        <Button title="Go Detail" onPress={this.buttonHandler} />
+        <Button title="Go Main Page" onPress={this.buttonHandler} />
       </View>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    username: state.profile.username
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -43,6 +36,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
-)(FindPlaceScreen);
+)(PlaceDetailScreen);
